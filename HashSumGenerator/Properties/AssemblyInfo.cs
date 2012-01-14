@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("HashSumGenerator")]
-[assembly: AssemblyCopyright("Erling Reizer ©  2012")]
+[assembly: AssemblyCopyright("Vattenmelon ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
