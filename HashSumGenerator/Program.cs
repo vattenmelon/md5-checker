@@ -16,10 +16,7 @@ namespace HashSumGenerator
             String path = args[0];
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainWindow f = new MainWindow();
-            f.Label_Filename = path.Substring(path.LastIndexOf("\\") + 1);
-            f.TextBox_MD5Text = HashUtil.ToMd5(path);
-            f.TextBox_Sha256Text = HashUtil.ToSha256(path);
+            MainWindow f = new MainWindow(path);
             Application.Run(f);
         }
     }
