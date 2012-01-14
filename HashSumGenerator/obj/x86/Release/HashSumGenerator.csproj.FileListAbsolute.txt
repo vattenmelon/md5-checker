@@ -1,9 +1,0 @@
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\bin\Release\HashSumGenerator.exe
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\bin\Release\HashSumGenerator.pdb
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\HashSumGenerator.Properties.Resources.resources
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\GenerateResource.read.1.tlog
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\GenerateResource.write.1.tlog
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\HashSumGenerator.exe
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\HashSumGenerator.pdb
-C:\Users\Erling\documents\visual studio 2010\Projects\HashSumGenerator\HashSumGenerator\obj\x86\Release\HashSumGenerator.MainWindow.resources
