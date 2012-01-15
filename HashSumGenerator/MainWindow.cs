@@ -15,16 +15,16 @@ namespace HashSumGenerator
     {
         private String filePath;
         private FileStream file;
-        Dictionary<String, TextBox> textbox = new Dictionary<String, TextBox>();
-        IList<String> algorithms = new List<String>();
+        Dictionary<HashUtil.Algorithm, TextBox> textbox = new Dictionary<HashUtil.Algorithm, TextBox>();
+        IList<HashUtil.Algorithm> algorithms = new List<HashUtil.Algorithm>();
         public MainWindow(String filePath)
         {
             InitializeComponent();
-            algorithms.Add(HashUtil.MD5);
-            algorithms.Add(HashUtil.SHA256);
+            algorithms.Add(HashUtil.Algorithm.MD5);
+            algorithms.Add(HashUtil.Algorithm.SHA256);
             this.filePath = filePath;
-            textbox.Add(HashUtil.MD5, textBox_MD5);
-            textbox.Add(HashUtil.SHA256, textBox_Sha256);
+            textbox.Add(HashUtil.Algorithm.MD5, textBox_MD5);
+            textbox.Add(HashUtil.Algorithm.SHA256, textBox_Sha256);
             label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\") + 1);
             file = FileUtil.OpenFileStream(filePath);
             backgroundWorker1.RunWorkerAsync(algorithms);
@@ -37,9 +37,9 @@ namespace HashSumGenerator
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         { 	
-        	IList<String> algos = e.Argument as IList<String>;
-        	String algo = algos[0];
-            Dictionary<String, String> resultDictionary = new Dictionary<String, String>();
+        	IList<HashUtil.Algorithm> algos = e.Argument as IList<HashUtil.Algorithm>;
+        	HashUtil.Algorithm algo = algos[0];
+            Dictionary<HashUtil.Algorithm, String> resultDictionary = new Dictionary<HashUtil.Algorithm, String>();
             resultDictionary.Add(algo, HashUtil.Hash(algo, file));
             algos.Remove(algo);
             ResultObject res = new ResultObject();
@@ -52,8 +52,8 @@ namespace HashSumGenerator
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         	ResultObject resultObject = e.Result as ResultObject;
-            Dictionary<String, String> resultDictionary = resultObject.result;
-            String key = resultDictionary.Keys.First();
+            Dictionary<HashUtil.Algorithm, String> resultDictionary = resultObject.result;
+            HashUtil.Algorithm key = resultDictionary.Keys.First();
             textbox[key].Text = resultDictionary[key];
             if (resultObject.algos.Count > 0){
             	backgroundWorker1.RunWorkerAsync(resultObject.algos);
@@ -67,7 +67,7 @@ namespace HashSumGenerator
         }
     }
     class ResultObject{
-    	public IList<String> algos;
-    	public Dictionary<String, String> result;
+    	public IList<HashUtil.Algorithm> algos;
+    	public Dictionary<HashUtil.Algorithm, String> result;
     }
 }

@@ -10,8 +10,13 @@ namespace HashSumGenerator
 {
     class HashUtil
     {
-        public const string MD5 = "MD5";
-        public const string SHA256 = "SHA256";
+    	public enum Algorithm{
+    		MD5,
+    		SHA256
+    	}
+    	
+        //public const string MD5 = "MD5";
+        //public const string SHA256 = "SHA256";
         public static String ToMd5(FileStream file)
         {
             return generateHash(file, System.Security.Cryptography.MD5.Create());
@@ -34,11 +39,11 @@ namespace HashSumGenerator
             return sbuilder.ToString();
         }
     	
-		public static String Hash(string algo, FileStream file)
+		public static String Hash(Algorithm algo, FileStream file)
 		{
-			if (MD5.Equals(algo)){
+			if (Algorithm.MD5.Equals(algo)){
 				return ToMd5(file);
-			}else if(SHA256.Equals(algo)){
+			}else if(Algorithm.SHA256.Equals(algo)){
 				return ToSha256(file);
 			}
 			return null;
