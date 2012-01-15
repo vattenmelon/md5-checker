@@ -28,7 +28,7 @@ namespace HashSumGenerator
 
             StringBuilder sbuilder = new StringBuilder();
             foreach (byte bite in hash)
-            {//"X2"
+            {   //"X2"
                 sbuilder.Append(bite.ToString("x2"));
             }
             return sbuilder.ToString();

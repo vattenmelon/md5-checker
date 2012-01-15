@@ -20,7 +20,6 @@ namespace HashSumGenerator
             this.filePath = filePath;
             label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\") + 1);
             backgroundWorker1.RunWorkerAsync(null);
-            
         }
 
         public String FilePath
