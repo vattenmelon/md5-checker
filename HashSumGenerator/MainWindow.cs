@@ -30,11 +30,6 @@ namespace HashSumGenerator
             backgroundWorker1.RunWorkerAsync(jobbs);
         }
 
-        public String FilePath
-        {
-            set { filePath = value; }
-        }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         { 	
         	IList<HashUtil.Algorithm> jobbs = e.Argument as IList<HashUtil.Algorithm>;
@@ -64,6 +59,10 @@ namespace HashSumGenerator
                 progressBar1.Hide();
             }
             
+        }
+        public String FilePath
+        {
+            set { filePath = value; }
         }
     }
     class ResultObject{
