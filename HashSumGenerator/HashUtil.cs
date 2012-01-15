@@ -23,20 +23,14 @@ namespace HashSumGenerator
         }
 
         public static String ToSha256(FileStream file)
-        { 
+        {  
             return generateHash(file, System.Security.Cryptography.SHA256.Create());
         }
 
         private static String generateHash(FileStream file, HashAlgorithm algorithm)
         {
             byte[] hash = algorithm.ComputeHash(file);
-
-            StringBuilder sbuilder = new StringBuilder();
-            foreach (byte bite in hash)
-            {   //"X2"
-                sbuilder.Append(bite.ToString("x2"));
-            }
-            return sbuilder.ToString();
+            return BitConverter.ToString(hash).Replace("-", String.Empty).ToLower();
         }
     	
 		public static String Hash(Algorithm algo, FileStream file)
