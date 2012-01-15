@@ -33,5 +33,15 @@ namespace HashSumGenerator
             }
             return sbuilder.ToString();
         }
+    	
+		public static String Hash(string algo, FileStream file)
+		{
+			if (MD5.Equals(algo)){
+				return ToMd5(file);
+			}else if(SHA256.Equals(algo)){
+				return ToSha256(file);
+			}
+			return null;
+		}
     }
 }

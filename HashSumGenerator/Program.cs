@@ -14,6 +14,7 @@ namespace HashSumGenerator
         static void Main(string[] args)
         {
             String path = args[0];
+            //String path = @"c:\eula.1028.txt";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainWindow f = new MainWindow(path);
