@@ -13,12 +13,22 @@ namespace HashSumGenerator
         [STAThread]
         static void Main(string[] args)
         {
-            String path = args[0];
-            //String path = @"c:\eula.1028.txt";
-            Application.EnableVisualStyles();
+        	Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainWindow f = new MainWindow(path);
-            Application.Run(f);
+           	String path = String.Empty;
+            if (args.Length == 0){
+            	OpenFileDialog a = new OpenFileDialog();
+            	a.ShowDialog();
+            	path = a.FileName;
+            }else{
+            	path = args[0];
+            }
+           	if (path == String.Empty){
+           		MessageBox.Show("No file selected");
+           	}else{
+            	MainWindow f = new MainWindow(path);
+           		Application.Run(f);
+           	}
         }
     }
 }
