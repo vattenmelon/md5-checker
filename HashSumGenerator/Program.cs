@@ -16,6 +16,7 @@ namespace HashSumGenerator
         	Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
            	String path = String.Empty;
+           	
             if (args.Length == 0){
             	OpenFileDialog a = new OpenFileDialog();
             	a.ShowDialog();
