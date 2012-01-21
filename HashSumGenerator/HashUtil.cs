@@ -33,8 +33,7 @@ namespace HashSumGenerator
 
         private static String generateHash(FileStream file, HashAlgorithm algorithm)
         {
-            byte[] hash = algorithm.ComputeHash(file);
-            return BitConverter.ToString(hash).Replace("-", String.Empty).ToLower();
+            return BitConverter.ToString(algorithm.ComputeHash(file)).Replace("-", String.Empty).ToLower();
         }
     	
 		public static String Hash(Algorithm algo, FileStream file)
