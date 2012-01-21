@@ -16,12 +16,14 @@ namespace HashSumGenerator
         private String filePath;
         private FileStream file;
         Dictionary<HashUtil.Algorithm, TextBox> textbox = new Dictionary<HashUtil.Algorithm, TextBox>();
-        IList<HashUtil.Algorithm> jobbs = new List<HashUtil.Algorithm>();
+        IList<HashUtil.Algorithm> jobbs = new List<HashUtil.Algorithm>()
+        {
+        	{HashUtil.Algorithm.MD5},
+        	{HashUtil.Algorithm.SHA256}
+        };
         public MainWindow(String filePath)
         {
             InitializeComponent();
-            jobbs.Add(HashUtil.Algorithm.MD5);
-            jobbs.Add(HashUtil.Algorithm.SHA256);
             this.filePath = filePath;
             textbox.Add(HashUtil.Algorithm.MD5, textBox_MD5);
             textbox.Add(HashUtil.Algorithm.SHA256, textBox_Sha256);
