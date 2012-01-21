@@ -13,10 +13,15 @@ namespace HashSumGenerator
     	public enum Algorithm{
     		MD5,
     		SHA256
+    		
     	}
-    	
-        //public const string MD5 = "MD5";
-        //public const string SHA256 = "SHA256";
+    	public delegate String ProcessHashAlgorithmDelegate(FileStream file);
+    	static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
+		{
+    		{ Algorithm.MD5, new ProcessHashAlgorithmDelegate(ToMd5)},
+    		{ Algorithm.SHA256, new ProcessHashAlgorithmDelegate(ToSha256)},
+		};
+
         public static String ToMd5(FileStream file)
         {
             return generateHash(file, System.Security.Cryptography.MD5.Create());
@@ -34,13 +39,8 @@ namespace HashSumGenerator
         }
     	
 		public static String Hash(Algorithm algo, FileStream file)
-		{
-			if (Algorithm.MD5.Equals(algo)){
-				return ToMd5(file);
-			}else if(Algorithm.SHA256.Equals(algo)){
-				return ToSha256(file);
-			}
-			return null;
+		{   
+			return algos[algo](file);
 		}
     }
 }
