@@ -13,7 +13,6 @@ namespace HashSumGenerator
     	public enum Algorithm{
     		MD5,
     		SHA256
-    		
     	}
     	public delegate String ProcessHashAlgorithmDelegate(FileStream file);
     	static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
