@@ -29,7 +29,7 @@ namespace HashSumGenerator
             textbox.Add(HashUtil.Algorithm.SHA256, textBox_Sha256);
             label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\") + 1);
             file = File.OpenRead(filePath);
-            backgroundWorker1.RunWorkerAsync(jobbs);
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
