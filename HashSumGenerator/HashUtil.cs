@@ -36,6 +36,7 @@ namespace HashSumGenerator
 
         private static String GenerateHash(FileStream file, HashAlgorithm algorithm)
         {	
+        	//go to start of stream
         	file.Position = 0;
             return BitConverter.ToString(algorithm.ComputeHash(file)).Replace("-", String.Empty).ToLower();
         }
