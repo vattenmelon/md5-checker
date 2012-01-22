@@ -43,10 +43,9 @@ namespace HashSumGenerator
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+        { 
         	Tuple<HashUtil.Algorithm, String> resultTuple = e.Result as Tuple<HashUtil.Algorithm, String>;
-            HashUtil.Algorithm key = resultTuple.Item1;
-            textbox[key].Text = resultTuple.Item2;
+            textbox[resultTuple.Item1].Text = resultTuple.Item2;
             if (jobbs.Count > 0){
             	backgroundWorker1.RunWorkerAsync(jobbs);
             }
