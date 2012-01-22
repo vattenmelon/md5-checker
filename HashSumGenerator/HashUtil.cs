@@ -15,7 +15,7 @@ namespace HashSumGenerator
     		SHA256
     	}
     	private delegate String ProcessHashAlgorithmDelegate(FileStream file);
-    	private static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
+    	private static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> Algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
 		{
     		{ Algorithm.MD5, new ProcessHashAlgorithmDelegate(ToMd5)},
     		{ Algorithm.SHA256, new ProcessHashAlgorithmDelegate(ToSha256)},
@@ -26,15 +26,15 @@ namespace HashSumGenerator
 		}
         private static String ToMd5(FileStream file)
         {
-            return generateHash(file, System.Security.Cryptography.MD5.Create());
+            return GenerateHash(file, System.Security.Cryptography.MD5.Create());
         }
 
         private static String ToSha256(FileStream file)
         {  
-            return generateHash(file, System.Security.Cryptography.SHA256.Create());
+            return GenerateHash(file, System.Security.Cryptography.SHA256.Create());
         }
 
-        private static String generateHash(FileStream file, HashAlgorithm algorithm)
+        private static String GenerateHash(FileStream file, HashAlgorithm algorithm)
         {
             return BitConverter.ToString(algorithm.ComputeHash(file)).Replace("-", String.Empty).ToLower();
         }
