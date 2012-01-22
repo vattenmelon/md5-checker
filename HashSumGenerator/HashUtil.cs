@@ -15,7 +15,7 @@ namespace HashSumGenerator
     		SHA256
     	}
     	private delegate String ProcessHashAlgorithmDelegate(FileStream file);
-    	static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
+    	private static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
 		{
     		{ Algorithm.MD5, new ProcessHashAlgorithmDelegate(ToMd5)},
     		{ Algorithm.SHA256, new ProcessHashAlgorithmDelegate(ToSha256)},
