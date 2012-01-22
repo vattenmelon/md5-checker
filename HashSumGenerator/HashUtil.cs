@@ -22,7 +22,7 @@ namespace HashSumGenerator
 		};
 		public static String Hash(Algorithm algo, FileStream file)
 		{   
-			return algos[algo](file);
+			return Algos[algo](file);
 		}
         private static String ToMd5(FileStream file)
         {
