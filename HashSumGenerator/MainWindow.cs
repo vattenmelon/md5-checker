@@ -34,12 +34,9 @@ namespace HashSumGenerator
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         { 	
-        	IList<HashUtil.Algorithm> jobbs = e.Argument as IList<HashUtil.Algorithm>;
-        	HashUtil.Algorithm algo = jobbs[0];
-        	Tuple<HashUtil.Algorithm, String> resultTuple = new Tuple<HashUtil.Algorithm, String>(algo, HashUtil.Hash(algo, file));
-            jobbs.Remove(algo);
-            e.Result = resultTuple;
-
+        	HashUtil.Algorithm algo = jobbs.First();
+        	jobbs.Remove(algo);
+        	e.Result = new Tuple<HashUtil.Algorithm, String>(algo, HashUtil.Hash(algo, file));
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -47,7 +44,7 @@ namespace HashSumGenerator
         	Tuple<HashUtil.Algorithm, String> resultTuple = e.Result as Tuple<HashUtil.Algorithm, String>;
             textbox[resultTuple.Item1].Text = resultTuple.Item2;
             if (jobbs.Count > 0){
-            	backgroundWorker1.RunWorkerAsync(jobbs);
+            	backgroundWorker1.RunWorkerAsync();
             }
             else 
             {
