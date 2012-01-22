@@ -36,24 +36,19 @@ namespace HashSumGenerator
         { 	
         	IList<HashUtil.Algorithm> jobbs = e.Argument as IList<HashUtil.Algorithm>;
         	HashUtil.Algorithm algo = jobbs[0];
-            Dictionary<HashUtil.Algorithm, String> resultDictionary = new Dictionary<HashUtil.Algorithm, String>();
-            resultDictionary.Add(algo, HashUtil.Hash(algo, file));
+        	Tuple<HashUtil.Algorithm, String> resultTuple = new Tuple<HashUtil.Algorithm, String>(algo, HashUtil.Hash(algo, file));
             jobbs.Remove(algo);
-            ResultObject res = new ResultObject();
-            res.jobbs = jobbs;
-            res.result = resultDictionary;
-            e.Result = res;
+            e.Result = resultTuple;
 
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-        	ResultObject resultObject = e.Result as ResultObject;
-            Dictionary<HashUtil.Algorithm, String> resultDictionary = resultObject.result;
-            HashUtil.Algorithm key = resultDictionary.Keys.First();
-            textbox[key].Text = resultDictionary[key];
-            if (resultObject.jobbs.Count > 0){
-            	backgroundWorker1.RunWorkerAsync(resultObject.jobbs);
+        	Tuple<HashUtil.Algorithm, String> resultTuple = e.Result as Tuple<HashUtil.Algorithm, String>;
+            HashUtil.Algorithm key = resultTuple.Item1;
+            textbox[key].Text = resultTuple.Item2;
+            if (jobbs.Count > 0){
+            	backgroundWorker1.RunWorkerAsync(jobbs);
             }
             else 
             {
@@ -67,8 +62,5 @@ namespace HashSumGenerator
             set { filePath = value; }
         }
     }
-    class ResultObject{
-    	public IList<HashUtil.Algorithm> jobbs;
-    	public Dictionary<HashUtil.Algorithm, String> result;
-    }
+
 }
