@@ -50,8 +50,7 @@ namespace HashSumGenerator
             {
                 file.Close();
                 progressBar1.Hide();
-            }
-            
+            }     
         }
         public String FilePath
         {
