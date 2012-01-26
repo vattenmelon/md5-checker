@@ -13,7 +13,6 @@ namespace HashSumGenerator
 {
     public partial class MainWindow : Form
     {
-        private String filePath;
         private FileStream file;
         Dictionary<HashUtil.Algorithm, TextBox> textbox = new Dictionary<HashUtil.Algorithm, TextBox>();
         IList<HashUtil.Algorithm> jobbs = new List<HashUtil.Algorithm>()
@@ -24,7 +23,6 @@ namespace HashSumGenerator
         public MainWindow(String filePath)
         {
             InitializeComponent();
-            this.filePath = filePath;
             textbox.Add(HashUtil.Algorithm.MD5, textBox_MD5);
             textbox.Add(HashUtil.Algorithm.SHA256, textBox_Sha256);
             label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\", StringComparison.InvariantCulture) + 1);
@@ -51,10 +49,6 @@ namespace HashSumGenerator
                 file.Close();
                 progressBar1.Hide();
             }     
-        }
-        public String FilePath
-        {
-            set { filePath = value; }
         }
     }
 
