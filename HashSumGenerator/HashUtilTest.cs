@@ -18,8 +18,8 @@ namespace HashSumGenerator
         public void TestMethod()
         {
             FileStream f = File.OpenRead("HashSumGenerator.exe");
-            string md5 = HashUtil.Hash(HashUtil.Algorithm.MD5, f);
-            string sha256 = HashUtil.Hash(HashUtil.Algorithm.SHA256, f);
+            string md5 = HashUtil.Hash(Algorithm.MD5, f);
+            string sha256 = HashUtil.Hash(Algorithm.SHA256, f);
             Assert.AreNotEqual(md5, sha256);
         }
         

@@ -9,9 +9,15 @@
     using System.Text;
     using System.Windows.Forms;
     
-    public class HashUtil
+    public enum Algorithm
     {
-        private static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
+        MD5,
+        SHA256
+    }
+    
+    public static class HashUtil
+    {
+        private static Dictionary<Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<Algorithm, ProcessHashAlgorithmDelegate>()
         {
             {
                 Algorithm.MD5, new ProcessHashAlgorithmDelegate(ToMd5)
@@ -20,18 +26,8 @@
                 Algorithm.SHA256, new ProcessHashAlgorithmDelegate(ToSha256)
             }
         };
-        
-        private HashUtil()
-        {    
-        }
                 
         private delegate string ProcessHashAlgorithmDelegate(FileStream file);
-        
-        public enum Algorithm
-        {
-            MD5,
-            SHA256
-        }
            
         public static string Hash(Algorithm algo, FileStream file)
         {   
