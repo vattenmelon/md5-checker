@@ -6,12 +6,11 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
-using NUnit.Framework;
-using System.IO;
-
 namespace HashSumGenerator
 {
+    using System;
+    using NUnit.Framework;
+    using System.IO;
     [TestFixture]
     public class HashUtilTest
     {
