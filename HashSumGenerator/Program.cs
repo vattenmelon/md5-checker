@@ -13,22 +13,22 @@ namespace HashSumGenerator
         [STAThread]
         static void Main(string[] args)
         {
-        	Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           	String path = String.Empty;
+            string path = String.Empty;
             if (args.Length == 0){
-            	OpenFileDialog a = new OpenFileDialog();
-            	a.ShowDialog();
-            	path = a.FileName;
+                OpenFileDialog a = new OpenFileDialog();
+                a.ShowDialog();
+                path = a.FileName;
             }else{
-            	path = args[0];
+                path = args[0];
             }
-           	if (String.IsNullOrEmpty(path)){
-           		MessageBox.Show("No file selected");
-           	}else{
-            	MainWindow f = new MainWindow(path);
-           		Application.Run(f);
-           	}
+               if (String.IsNullOrEmpty(path)){
+                   MessageBox.Show("No file selected");
+               }else{
+                MainWindow f = new MainWindow(path);
+                   Application.Run(f);
+               }
         }
     }
 }

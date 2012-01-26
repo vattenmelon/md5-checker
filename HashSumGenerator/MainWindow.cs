@@ -17,8 +17,8 @@ namespace HashSumGenerator
         Dictionary<HashUtil.Algorithm, TextBox> textbox = new Dictionary<HashUtil.Algorithm, TextBox>();
         IList<HashUtil.Algorithm> jobbs = new List<HashUtil.Algorithm>()
         {
-        	{HashUtil.Algorithm.MD5},
-        	{HashUtil.Algorithm.SHA256}
+            {HashUtil.Algorithm.MD5},
+            {HashUtil.Algorithm.SHA256}
         };
         public MainWindow(String filePath)
         {
@@ -31,18 +31,18 @@ namespace HashSumGenerator
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        { 	
-        	HashUtil.Algorithm algo = jobbs.First();
-        	jobbs.Remove(algo);
-        	e.Result = new Tuple<HashUtil.Algorithm, String>(algo, HashUtil.Hash(algo, file));
+        {     
+            HashUtil.Algorithm algo = jobbs.First();
+            jobbs.Remove(algo);
+            e.Result = new Tuple<HashUtil.Algorithm, String>(algo, HashUtil.Hash(algo, file));
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         { 
-        	Tuple<HashUtil.Algorithm, String> resultTuple = e.Result as Tuple<HashUtil.Algorithm, String>;
+            Tuple<HashUtil.Algorithm, String> resultTuple = e.Result as Tuple<HashUtil.Algorithm, String>;
             textbox[resultTuple.Item1].Text = resultTuple.Item2;
             if (jobbs.Count > 0){
-            	backgroundWorker1.RunWorkerAsync();
+                backgroundWorker1.RunWorkerAsync();
             }
             else 
             {
