@@ -5,9 +5,6 @@
     using System.Linq;
     using System.Windows.Forms;
     
-    /// <summary>
-    /// Main program class.
-    /// </summary>
     public static class Program
     {
         /// <summary>
