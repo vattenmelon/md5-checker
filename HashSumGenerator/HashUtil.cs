@@ -10,6 +10,9 @@ namespace HashSumGenerator
 {
     class HashUtil
     {
+    	private HashUtil(){
+    		
+    	}
     	public enum Algorithm{
     		MD5,
     		SHA256

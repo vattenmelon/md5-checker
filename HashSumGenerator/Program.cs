@@ -23,7 +23,7 @@ namespace HashSumGenerator
             }else{
             	path = args[0];
             }
-           	if (path == String.Empty){
+           	if (String.IsNullOrEmpty(path)){
            		MessageBox.Show("No file selected");
            	}else{
             	MainWindow f = new MainWindow(path);

@@ -27,7 +27,7 @@ namespace HashSumGenerator
             this.filePath = filePath;
             textbox.Add(HashUtil.Algorithm.MD5, textBox_MD5);
             textbox.Add(HashUtil.Algorithm.SHA256, textBox_Sha256);
-            label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+            label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\", StringComparison.InvariantCulture) + 1);
             file = File.OpenRead(filePath);
             backgroundWorker1.RunWorkerAsync();
         }
