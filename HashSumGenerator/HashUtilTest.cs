@@ -9,8 +9,8 @@
 namespace HashSumGenerator
 {
     using System;
-    using NUnit.Framework;
     using System.IO;
+    using NUnit.Framework;
     [TestFixture]
     public class HashUtilTest
     {

@@ -9,41 +9,50 @@
     using System.Text;
     using System.Windows.Forms;
     
-    class HashUtil
+    public class HashUtil
     {
-        private HashUtil(){
-            
+        private static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
+        {
+            {
+                Algorithm.MD5, new ProcessHashAlgorithmDelegate(ToMd5)
+            },
+            {
+                Algorithm.SHA256, new ProcessHashAlgorithmDelegate(ToSha256)
+            }
+        };
+        
+        private HashUtil()
+        {    
         }
-        public enum Algorithm{
+                
+        private delegate string ProcessHashAlgorithmDelegate(FileStream file);
+        
+        public enum Algorithm
+        {
             MD5,
             SHA256
         }
-        private delegate String ProcessHashAlgorithmDelegate(FileStream file);
-        private static Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate> Algos = new Dictionary<HashUtil.Algorithm, ProcessHashAlgorithmDelegate>()
-        {
-            { Algorithm.MD5, new ProcessHashAlgorithmDelegate(ToMd5)},
-            { Algorithm.SHA256, new ProcessHashAlgorithmDelegate(ToSha256)},
-        };
-        public static String Hash(Algorithm algo, FileStream file)
+           
+        public static string Hash(Algorithm algo, FileStream file)
         {   
-            return Algos[algo](file);
+            return algos[algo](file);
         }
-        private static String ToMd5(FileStream file)
+        
+        private static string ToMd5(FileStream file)
         {
             return GenerateHash(file, System.Security.Cryptography.MD5.Create());
         }
 
-        private static String ToSha256(FileStream file)
+        private static string ToSha256(FileStream file)
         {  
             return GenerateHash(file, System.Security.Cryptography.SHA256.Create());
         }
 
-        private static String GenerateHash(FileStream file, HashAlgorithm algorithm)
+        private static string GenerateHash(FileStream file, HashAlgorithm algorithm)
         {    
-            //go to start of stream
+            // go to start of stream
             file.Position = 0;
             return BitConverter.ToString(algorithm.ComputeHash(file)).Replace("-", String.Empty).ToLower();
-        }
-        
+        }    
     }
 }
