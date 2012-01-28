@@ -24,7 +24,7 @@
             },
             {
                 Algorithm.SHA256
-            }
+            },
         };
         
         
@@ -92,5 +92,13 @@
             }
         }
         
+        
+        void MainWindowKeyUp(object sender, KeyEventArgs e)
+        {  
+            if (Keys.Enter.Equals(e.KeyCode))
+            {
+                this.Close();
+            }
+        }
     }
 }

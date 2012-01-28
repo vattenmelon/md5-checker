@@ -73,9 +73,10 @@
             // label_Filename
             // 
             this.label_Filename.AutoSize = true;
+            this.label_Filename.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Filename.Location = new System.Drawing.Point(15, 13);
             this.label_Filename.Name = "label_Filename";
-            this.label_Filename.Size = new System.Drawing.Size(35, 13);
+            this.label_Filename.Size = new System.Drawing.Size(41, 13);
             this.label_Filename.TabIndex = 4;
             this.label_Filename.Text = "label1";
             // 
@@ -98,10 +99,12 @@
             this.Controls.Add(this.label_Sha256);
             this.Controls.Add(this.textBox_MD5);
             this.Controls.Add(this.label_MD5);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Hashgenerator";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainWindowKeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -114,6 +117,7 @@
         private System.Windows.Forms.TextBox textBox_Sha256;
         private System.Windows.Forms.Label label_Filename;
         private System.Windows.Forms.ProgressBar progressBar1;
+        
     }
 }
 
