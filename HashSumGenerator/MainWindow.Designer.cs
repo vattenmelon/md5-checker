@@ -34,7 +34,6 @@
             this.textBox_Sha256 = new System.Windows.Forms.TextBox();
             this.label_Filename = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // label_MD5
@@ -88,11 +87,6 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 5;
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,7 +104,6 @@
             this.Text = "Hashgenerator";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -121,7 +114,6 @@
         private System.Windows.Forms.TextBox textBox_Sha256;
         private System.Windows.Forms.Label label_Filename;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

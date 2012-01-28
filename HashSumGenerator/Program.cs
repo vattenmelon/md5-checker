@@ -13,7 +13,7 @@
         /// <param name="args">Program arguments, only one allowed: file to hash.</param>
         [STAThread]
         public static void Main(string[] args)
-        {
+        {   
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             string path = String.Empty;
@@ -33,8 +33,8 @@
                    MessageBox.Show("No file selected");
                }
                else
-               {
-                MainWindow f = new MainWindow(path);
+               {   
+                   MainWindow f = new MainWindow(path);
                    Application.Run(f);
                }
         }

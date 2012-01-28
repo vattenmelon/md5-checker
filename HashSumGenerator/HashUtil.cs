@@ -27,24 +27,24 @@
             }
         };
                 
-        private delegate string ProcessHashAlgorithmDelegate(FileStream file);
+        private delegate string ProcessHashAlgorithmDelegate(Stream file);
            
-        public static string Hash(Algorithm algo, FileStream file)
+        public static string Hash(Algorithm algo, Stream file)
         {   
             return algos[algo](file);
         }
         
-        private static string ToMd5(FileStream file)
+        private static string ToMd5(Stream file)
         {
             return GenerateHash(file, System.Security.Cryptography.MD5.Create());
         }
 
-        private static string ToSha256(FileStream file)
+        private static string ToSha256(Stream file)
         {  
             return GenerateHash(file, System.Security.Cryptography.SHA256.Create());
         }
 
-        private static string GenerateHash(FileStream file, HashAlgorithm algorithm)
+        private static string GenerateHash(Stream file, HashAlgorithm algorithm)
         {    
             // go to start of stream
             file.Position = 0;
