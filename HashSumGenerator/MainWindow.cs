@@ -7,6 +7,7 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Text;
     using System.Threading;
     using System.Windows.Forms;
@@ -77,7 +78,19 @@
             Tuple<Algorithm, string, Stream> resultTuple = e.Result as Tuple<Algorithm, string, Stream>;
             resultTuple.Item3.Close();
             this.textbox[resultTuple.Item1].Text = resultTuple.Item2;
+            RemoveWorker(resultTuple.Item1);
 
         }
+        
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void RemoveWorker(Algorithm algorithm)
+        {
+            workers.Remove(algorithm);
+            if (workers.Count == 0)
+            {
+                progressBar1.Hide();
+            }
+        }
+        
     }
 }
