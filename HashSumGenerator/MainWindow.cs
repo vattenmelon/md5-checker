@@ -48,7 +48,6 @@ namespace HashSumGenerator
 
         void CreateJobs()
         {
-            
             jobbs.ForEach(algorithm => 
                           {
                             BackgroundWorker worker = new BackgroundWorker();
