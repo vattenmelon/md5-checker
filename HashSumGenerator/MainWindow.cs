@@ -48,13 +48,15 @@ namespace HashSumGenerator
 
         void CreateJobs()
         {
-            foreach (var alg in jobbs)
-            {   
-                BackgroundWorker worker = new BackgroundWorker();
-                worker.DoWork += DoWork;
-                worker.RunWorkerCompleted += WorkerCompleted;
-                workers.Add(alg, worker);
-            }
+            
+            jobbs.ForEach(algorithm => 
+                          {
+                            BackgroundWorker worker = new BackgroundWorker();
+                            worker.DoWork += DoWork;
+                            worker.RunWorkerCompleted += WorkerCompleted;
+                            workers.Add(algorithm, worker);
+                         });
+            
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
