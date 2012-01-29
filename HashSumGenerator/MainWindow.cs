@@ -44,11 +44,8 @@
 
         void CreateJobs()
         {
-            //int maxNumberOfThreads = 2;
-            //int max = maxNumberOfThreads <= jobbs.Count ? maxNumberOfThreads : jobbs.Count;
-            for (int i = 0; i < jobbs.Count; i++)
+            foreach (var alg in jobbs)
             {   
-                Algorithm alg = jobbs[i];
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += DoWork;
                 worker.RunWorkerCompleted += WorkerCompleted;
