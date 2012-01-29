@@ -44,9 +44,9 @@
 
         void CreateJobs()
         {
-            int maxNumberOfThreads = 2;
-            int max = maxNumberOfThreads <= jobbs.Count ? maxNumberOfThreads : jobbs.Count;
-            for (int i = 0; i < maxNumberOfThreads; i++)
+            //int maxNumberOfThreads = 2;
+            //int max = maxNumberOfThreads <= jobbs.Count ? maxNumberOfThreads : jobbs.Count;
+            for (int i = 0; i < jobbs.Count; i++)
             {   
                 Algorithm alg = jobbs[i];
                 BackgroundWorker worker = new BackgroundWorker();
@@ -56,11 +56,22 @@
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void StartJobs()
         {
-            foreach (var entry in workers) {
-                Tuple<Algorithm, Stream> arguments = new Tuple<Algorithm, Stream>(entry.Key, File.OpenRead(filePath));
-                entry.Value.RunWorkerAsync(arguments);
+            int maxSimultan = 4;
+            int simult = maxSimultan <= workers.Count ? maxSimultan : workers.Count;
+            System.Diagnostics.Debug.WriteLine("simultaneous: " + simult);
+            for (int i = 0; i < simult; i++)
+            {          
+                var key = workers.Keys.ElementAt(i);
+                System.Diagnostics.Debug.WriteLine("job: " + key + " , busy: " + workers[key].IsBusy);
+                if (!workers[key].IsBusy)
+                {                
+                     System.Diagnostics.Debug.WriteLine("adding job: " + key);
+                     Tuple<Algorithm, Stream> arguments = new Tuple<Algorithm, Stream>(key, File.OpenRead(filePath));
+                     workers[key].RunWorkerAsync(arguments);   
+                }
             }
         }
 
@@ -79,6 +90,7 @@
             resultTuple.Item3.Close();
             this.textbox[resultTuple.Item1].Text = resultTuple.Item2;
             RemoveWorker(resultTuple.Item1);
+            StartJobs();
 
         }
         
