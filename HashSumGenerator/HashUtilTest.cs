@@ -1,4 +1,5 @@
-﻿/*
+﻿using System.Security.Cryptography;
+/*
  * Created by SharpDevelop.
  * User: Erling
  * Date: 21.01.2012
@@ -18,8 +19,8 @@ namespace HashSumGenerator
         public void TestMethod()
         {
             FileStream f = File.OpenRead("HashSumGenerator.exe");
-            string md5 = HashUtil.Hash(Algorithm.MD5, f);
-            string sha256 = HashUtil.Hash(Algorithm.SHA256, f);
+            string md5 = HashUtil.Hash(MD5.Create(), f);
+            string sha256 = HashUtil.Hash(SHA256.Create(), f);
             Assert.AreNotEqual(md5, sha256);
         }
         

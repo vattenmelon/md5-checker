@@ -1,4 +1,5 @@
-﻿namespace HashSumGenerator
+﻿using System.Security.Cryptography;
+namespace HashSumGenerator
 {
     using System;
     using System.Collections.Generic;
@@ -17,16 +18,17 @@
         static readonly DateTime Epoch = new DateTime (1970, 1, 1);
         private long start;
         private string filePath;
-        private IDictionary<Algorithm, BackgroundWorker> workers = new Dictionary<Algorithm, BackgroundWorker>();
-        private Dictionary<Algorithm, TextBox> textbox = new Dictionary<Algorithm, TextBox>();
-        private List<Algorithm> jobbs = new List<Algorithm>()
+        private IDictionary<HashAlgorithm, BackgroundWorker> workers = new Dictionary<HashAlgorithm, BackgroundWorker>();
+        private Dictionary<HashAlgorithm, TextBox> textbox = new Dictionary<HashAlgorithm, TextBox>();
+        private List<HashAlgorithm> jobbs = new List<HashAlgorithm>()
         {
             {
-                Algorithm.MD5
+                MD5.Create()
             },
             {
-                Algorithm.SHA256
+                SHA256.Create()
             },
+            
         };
         
         
@@ -34,8 +36,9 @@
         {
             this.InitializeComponent();
             this.filePath = filePath;
-            this.textbox.Add(Algorithm.MD5, this.textBox_MD5);
-            this.textbox.Add(Algorithm.SHA256, this.textBox_Sha256);
+             // o => o.Id == desiredId
+            this.textbox.Add(jobbs.Find( item => item is MD5), this.textBox_MD5);
+            this.textbox.Add(jobbs.Find( item => item is SHA256), this.textBox_Sha256);
             this.label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\", StringComparison.InvariantCulture) + 1);
             this.start = CurrentTimeMillis();
             CreateJobs();
@@ -68,7 +71,7 @@
                 if (!workers[key].IsBusy)
                 {                
                      System.Diagnostics.Debug.WriteLine("adding job: " + key);
-                     Tuple<Algorithm, Stream> arguments = new Tuple<Algorithm, Stream>(key, File.OpenRead(filePath));
+                     Tuple<HashAlgorithm, Stream> arguments = new Tuple<HashAlgorithm, Stream>(key, File.OpenRead(filePath));
                      workers[key].RunWorkerAsync(arguments);   
                 }
             }
@@ -76,16 +79,16 @@
 
         private void DoWork(object sender, DoWorkEventArgs e)
         {
-            Tuple<Algorithm, Stream> arguments = e.Argument as Tuple<Algorithm, Stream>;
-            Algorithm algo = arguments.Item1;
+            Tuple<HashAlgorithm, Stream> arguments = e.Argument as Tuple<HashAlgorithm, Stream>;
+            HashAlgorithm algo = arguments.Item1;
             Stream stream = arguments.Item2;
-            e.Result = new Tuple<Algorithm, string, Stream>(algo, HashUtil.Hash(algo, stream), stream);
+            e.Result = new Tuple<HashAlgorithm, string, Stream>(algo, HashUtil.Hash(algo, stream), stream);
         }
 
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Tuple<Algorithm, string, Stream> resultTuple = e.Result as Tuple<Algorithm, string, Stream>;
+            Tuple<HashAlgorithm, string, Stream> resultTuple = e.Result as Tuple<HashAlgorithm, string, Stream>;
             resultTuple.Item3.Close();
             this.textbox[resultTuple.Item1].Text = resultTuple.Item2;
             RemoveWorker(resultTuple.Item1);
@@ -94,7 +97,7 @@
         }
         
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void RemoveWorker(Algorithm algorithm)
+        public void RemoveWorker(HashAlgorithm algorithm)
         {
             workers.Remove(algorithm);
             if (workers.Count == 0)
