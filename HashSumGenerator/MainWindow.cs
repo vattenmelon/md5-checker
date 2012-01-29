@@ -14,6 +14,8 @@
     
     public partial class MainWindow : Form
     {
+        static readonly DateTime Epoch = new DateTime (1970, 1, 1);
+        private long start;
         private string filePath;
         private IDictionary<Algorithm, BackgroundWorker> workers = new Dictionary<Algorithm, BackgroundWorker>();
         private Dictionary<Algorithm, TextBox> textbox = new Dictionary<Algorithm, TextBox>();
@@ -35,7 +37,7 @@
             this.textbox.Add(Algorithm.MD5, this.textBox_MD5);
             this.textbox.Add(Algorithm.SHA256, this.textBox_Sha256);
             this.label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\", StringComparison.InvariantCulture) + 1);
-            
+            this.start = CurrentTimeMillis();
             CreateJobs();
             
             StartJobs();
@@ -56,7 +58,7 @@
         [MethodImpl(MethodImplOptions.Synchronized)]
         void StartJobs()
         {
-            int maxSimultan = 4;
+            int maxSimultan = 1;
             int simult = maxSimultan <= workers.Count ? maxSimultan : workers.Count;
             System.Diagnostics.Debug.WriteLine("simultaneous: " + simult);
             for (int i = 0; i < simult; i++)
@@ -98,6 +100,7 @@
             if (workers.Count == 0)
             {
                 progressBar1.Hide();
+                System.Diagnostics.Debug.WriteLine("calculating took: " + (CurrentTimeMillis() - start) + " ms.");
             }
         }
         
@@ -108,6 +111,11 @@
             {
                 this.Close();
             }
+        }
+        
+        static long CurrentTimeMillis()
+        {
+            return (long)(DateTime.UtcNow-Epoch).TotalMilliseconds;
         }
     }
 }
