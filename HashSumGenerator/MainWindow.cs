@@ -36,7 +36,6 @@ namespace HashSumGenerator
         {
             this.InitializeComponent();
             this.filePath = filePath;
-             // o => o.Id == desiredId
             this.textbox.Add(jobbs.Find( item => item is MD5), this.textBox_MD5);
             this.textbox.Add(jobbs.Find( item => item is SHA256), this.textBox_Sha256);
             this.label_Filename.Text = filePath.Substring(filePath.LastIndexOf("\\", StringComparison.InvariantCulture) + 1);
