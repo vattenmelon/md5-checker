@@ -61,7 +61,7 @@ namespace HashSumGenerator
         [MethodImpl(MethodImplOptions.Synchronized)]
         void StartJobs()
         {
-            int maxSimultan = 1;
+            int maxSimultan = Environment.ProcessorCount;
             int simult = maxSimultan <= workers.Count ? maxSimultan : workers.Count;
             System.Diagnostics.Debug.WriteLine("simultaneous: " + simult);
             for (int i = 0; i < simult; i++)
