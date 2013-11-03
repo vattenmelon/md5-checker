@@ -120,5 +120,47 @@ namespace HashSumGenerator
         {
             return (long)(DateTime.UtcNow-Epoch).TotalMilliseconds;
         }
+        
+        
+        void md5textchanged(object sender, EventArgs e)
+        {
+        	if (textBox_MD5_input.Text.Equals(String.Empty))
+    	    {
+    	    	labelM5_valid.Visible = false;	
+    	    }
+        	else if(textBox_MD5.Text.Equals(textBox_MD5_input.Text))
+    	    {
+    	   		labelM5_valid.Text = "OK";
+    	   		labelM5_valid.ForeColor = Color.Green;
+    	   		labelM5_valid.Visible = true;
+    	    }
+    	    else
+    	    {
+    	   		labelM5_valid.Text = "ERROR";
+    	   		labelM5_valid.ForeColor = Color.Red;
+    	   		labelM5_valid.Visible = true;
+    	    }
+        	   
+        }
+        
+        void sha256textchanged(object sender, EventArgs e)
+        {
+        	if (textBoxSHA256_input.Text.Equals(String.Empty))
+    	    {
+    	    	labelSHA56_valid.Visible = false;	
+    	    }
+        	else if(textBox_Sha256.Text.Equals(textBoxSHA256_input.Text))
+    	    {
+    	   		labelSHA56_valid.Text = "OK";
+    	   		labelSHA56_valid.ForeColor = Color.Green;
+    	   		labelSHA56_valid.Visible = true;
+    	    }
+    	    else
+    	    {
+    	   		labelSHA56_valid.Text = "ERROR";
+    	   		labelSHA56_valid.ForeColor = Color.Red;
+    	   		labelSHA56_valid.Visible = true;
+    	    }
+        }
     }
 }
