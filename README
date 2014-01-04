@@ -1,2 +1,4 @@
-Usage:
-HashSumGenerator.exe <filename>
+Simple util to check md5 and sha-256 checksums of files.
+
+Binary files in binary-folder. Edit contextmenu.reg in script and double-click to add "Hash" to contextmenu (right-click).
+
