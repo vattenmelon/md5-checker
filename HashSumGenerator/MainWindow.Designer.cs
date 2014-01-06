@@ -145,7 +145,7 @@
         	this.MaximizeBox = false;
         	this.MinimizeBox = false;
         	this.Name = "MainWindow";
-        	this.Text = "Checksumvalidator";
+        	this.Text = "md5-checker";
         	this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainWindowKeyUp);
         	this.ResumeLayout(false);
         	this.PerformLayout();
